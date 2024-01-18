@@ -1,7 +1,9 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { SharedLayout } from "./SharedLayout";
-import { accountLoader } from "../loaders/accountLoader";
 import { AccountTable } from "./AccountTable/AccountTable";
+import { lazy } from "react";
+
+const Profile = lazy(() => import("./Profile"));
 
 function App() {
   const router = createBrowserRouter(
@@ -9,8 +11,13 @@ function App() {
       {
         path: "/",
         element: <SharedLayout />,
-        // loader: accountLoader,
-        children: [{ path: "/", element: <AccountTable /> }],
+        children: [
+          { path: "/", element: <AccountTable /> },
+          {
+            path: "/account/:accountId",
+            element: <Profile />,
+          },
+        ],
       },
     ],
     { basename: "/a-task" }

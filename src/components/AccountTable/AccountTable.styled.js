@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledTable = styled.table({
   margin: "0 auto",
-  width: "100%",
+  width: "1000px",
   tableLayout: "fixed",
   borderRadius: "15px",
-  backgroundColor: "red",
   overflow: "hidden",
+  color: "black",
+  textAlign: "center",
 });
 
 export const StyledCaption = styled.caption({
@@ -16,4 +18,20 @@ export const StyledCaption = styled.caption({
 
 export const StyledThead = styled.thead({
   backgroundColor: "#3395ff",
+});
+
+export const StyledTr = styled.tr({
+  cursor: "pointer",
+  "&:nth-child(2n)": {
+    backgroundColor: "grey",
+  },
+  "&:hover": {
+    transform: "scale(0.99)",
+  },
+});
+
+export const StyledLink = styled(Link)({
+  display: "block",
+  textDecoration: "none",
+  color: "inherit",
 });
