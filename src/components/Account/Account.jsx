@@ -22,10 +22,10 @@ export const Account = ({ filter, handlerFilter }) => {
 
   const sortedData = useMemo(() => {
     return filteredDate(account, sortedElement, isRevers, filter);
-  }, [filter, isRevers, sortedElement]);
+  }, [sortedElement, isRevers, filter]);
 
   const tableHead = ["accountId", "email", "authToken", "creationDate"];
-
+  console.log("render app");
   return (
     <div>
       <Filter value={filter} handlerFilter={handlerFilter} />

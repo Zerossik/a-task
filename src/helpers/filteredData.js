@@ -1,19 +1,24 @@
+import { isSorted } from "../helpers";
+
 export const filteredDate = (data, sortedElement, isRevers, filter) => {
-  const sortedAccount = [...data]
-    .filter((obj) => {
-      for (let key in obj) {
-        if (obj[key].toString().toLowerCase().includes(filter.trim()))
-          return true;
-      }
-    })
-    .sort((a, b) => {
-      if (typeof a[sortedElement] === "number") {
-        console.log("ok");
-        return isRevers
-          ? a[sortedElement] - b[sortedElement]
-          : b[sortedElement] - a[sortedElement];
-      }
-    });
+  console.log("sort");
+  let isSort = null;
+
+  const sortedAccount = [...data].filter((obj) => {
+    for (let key in obj) {
+      if (obj[key].toString().toLowerCase().includes(filter.trim()))
+        return true;
+    }
+  });
+
+  sortedAccount.sort((a, b) => {
+    if (typeof a[sortedElement] === "number") {
+      console.log("ok");
+      return a[sortedElement] - b[sortedElement];
+    }
+  });
+
+  isSort = isSorted(data, sortedElement);
 
   return sortedAccount;
 };
