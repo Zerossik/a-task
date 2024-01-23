@@ -1,35 +1,35 @@
 import { StyledTable, StyledThead, StyledTr } from "./Table.styled";
 
-export const Table = ({ data = [], handler }) => {
+export const Table = ({ data = [], handlerNav, handlerSort, head }) => {
   return (
     <>
-      {Array.isArray(data) &&
-        data.length > 0 &&
-        typeof data[0] === "object" && (
-          <StyledTable>
-            <StyledThead>
-              <tr>
-                {Object.keys(data[0]).map((el, index) => (
-                  <th key={index}>{el}</th>
-                ))}
-              </tr>
-            </StyledThead>
-            <tbody>
-              {data.map((el, index) => (
-                <StyledTr
+      {
+        <StyledTable>
+          <StyledThead>
+            <tr>
+              {head.map((el, index) => (
+                <th
                   key={index}
-                  onClick={() =>
-                    handler ? handler(el) : console.log("handler Not Found")
-                  }
+                  onClick={(evt) => handlerSort?.(evt.target.textContent)}
                 >
+                  {el}
+                </th>
+              ))}
+            </tr>
+          </StyledThead>
+          <tbody>
+            {Array.isArray(data) &&
+              typeof data[0] === "object" &&
+              data.map((el, index) => (
+                <StyledTr key={index} onClick={() => handlerNav?.(el)}>
                   {Object.values(el).map((tabletValue, index) => (
                     <td key={index}>{tabletValue}</td>
                   ))}
                 </StyledTr>
               ))}
-            </tbody>
-          </StyledTable>
-        )}
+          </tbody>
+        </StyledTable>
+      }
     </>
   );
 };

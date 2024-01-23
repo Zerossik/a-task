@@ -5,15 +5,10 @@ export const StyledTable = styled.table({
   margin: "0 auto",
   width: "1000px",
   tableLayout: "fixed",
-  borderRadius: "15px",
+  borderRadius: "8px",
   overflow: "hidden",
   color: "black",
   textAlign: "center",
-});
-
-export const StyledCaption = styled.caption({
-  fontSize: "18px",
-  textAlign: "left",
 });
 
 export const StyledThead = styled.thead({
