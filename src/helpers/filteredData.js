@@ -1,8 +1,5 @@
-import { isSorted } from "../helpers";
-
-export const filteredDate = (data, sortedElement, isRevers, filter) => {
+export const filteredDate = (data, sortedElement, isDataSorted, filter) => {
   console.log("sort");
-  let isSort = null;
 
   const sortedAccount = [...data].filter((obj) => {
     for (let key in obj) {
@@ -13,12 +10,10 @@ export const filteredDate = (data, sortedElement, isRevers, filter) => {
 
   sortedAccount.sort((a, b) => {
     if (typeof a[sortedElement] === "number") {
-      console.log("ok");
+      console.log("Итерации сортировки");
       return a[sortedElement] - b[sortedElement];
     }
   });
-
-  isSort = isSorted(data, sortedElement);
 
   return sortedAccount;
 };

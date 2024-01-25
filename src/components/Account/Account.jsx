@@ -1,31 +1,38 @@
 import { Table } from "../Table";
 import { account } from "../../services";
 import { useNavigate } from "react-router-dom";
-import { useMemo, useState } from "react";
-import { filteredDate } from "../../helpers";
+import { useEffect, useMemo, useState } from "react";
+import { filteredDate, isSorted } from "../../helpers";
 import { Filter } from "../Filter";
 
 export const Account = ({ filter, handlerFilter }) => {
   const [sortedElement, setSortedElement] = useState("");
-  const [isRevers, setIsRevers] = useState(false);
+  const [isDataSorted, setIsDataSorted] = useState(false);
   const navigate = useNavigate();
+
+  const sortedData = useMemo(() => {
+    const res = filteredDate(account, sortedElement, isDataSorted, filter);
+    return isDataSorted ? res.reverse() : res;
+  }, [sortedElement, isDataSorted, filter]);
 
   const handlerAccountNavigate = (el) => {
     navigate(`account/${el.accountId}/profiles`);
   };
 
   const handlerSort = (el) => {
-    if (el === "email" || el === "authToken") return;
+    if (el === "email" || el === "authToken") {
+      return;
+    }
     setSortedElement(el);
-    setIsRevers((prev) => !prev);
+    const result = isSorted(sortedData, sortedElement);
+    console.log(`Проверяю... результат - ${result}`);
+    setIsDataSorted(result);
+
+    return;
   };
 
-  const sortedData = useMemo(() => {
-    return filteredDate(account, sortedElement, isRevers, filter);
-  }, [sortedElement, isRevers, filter]);
-
   const tableHead = ["accountId", "email", "authToken", "creationDate"];
-  console.log("render app");
+  console.log("render account");
   return (
     <div>
       <Filter value={filter} handlerFilter={handlerFilter} />
